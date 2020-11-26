@@ -1,0 +1,64 @@
+clear
+cd "/Users/mbp4/Desktop"
+import excel "INICIALES PERSONAL SES.xlsx", firstrow
+
+replace Trabajador = subinstr(Trabajador, ".", "",.)
+replace Trabajador = subinstr(Trabajador, ",", "",.)
+replace Trabajador = subinstr(Trabajador, "-", "",.)
+replace Trabajador = subinstr(Trabajador, "1", "",.)
+replace Trabajador = subinstr(Trabajador, "2", "",.)
+replace Trabajador = subinstr(Trabajador, "3", "",.)
+replace Trabajador = subinstr(Trabajador, "4", "",.)
+replace Trabajador = subinstr(Trabajador, "5", "",.)
+replace Trabajador = subinstr(Trabajador, "6", "",.)
+replace Trabajador = subinstr(Trabajador, "á", "a",.)
+replace Trabajador = subinstr(Trabajador, "é", "e",.)
+replace Trabajador = subinstr(Trabajador, "í", "i",.)
+replace Trabajador = subinstr(Trabajador, "ó", "o",.)
+replace Trabajador = subinstr(Trabajador, "ú", "u",.)
+
+replace Trabajador = upper(Trabajador)
+replace Trabajador = ustrrtrim(Trabajador)
+replace Trabajador = ustrltrim(Trabajador)
+replace Trabajador = stritrim(Trabajador)
+
+replace Trabajador = subinstr(Trabajador, "Á", "A",.)
+replace Trabajador = subinstr(Trabajador, "É", "E",.)
+replace Trabajador = subinstr(Trabajador, "Í", "I",.)
+replace Trabajador = subinstr(Trabajador, "Ó", "O",.)
+replace Trabajador = subinstr(Trabajador, "Ú", "U",.)
+replace Trabajador = subinstr(Trabajador, "ñ", "Ñ",.)
+
+
+
+replace NOMBRE1 = upper(NOMBRE1)
+replace NOMBRE1 = ustrrtrim(NOMBRE1)
+replace NOMBRE1 = ustrltrim(NOMBRE1)
+replace NOMBRE1 = stritrim(NOMBRE1)
+
+replace NOMBRE2 = upper(NOMBRE2)
+replace NOMBRE2 = ustrrtrim(NOMBRE2)
+replace NOMBRE2 = ustrltrim(NOMBRE2)
+replace NOMBRE2 = stritrim(NOMBRE2)
+
+replace APELLIDOPATERNO = upper(APELLIDOPATERNO)
+replace APELLIDOPATERNO = ustrrtrim(APELLIDOPATERNO)
+replace APELLIDOPATERNO = ustrltrim(APELLIDOPATERNO)
+replace APELLIDOPATERNO = stritrim(APELLIDOPATERNO)
+
+
+replace APELLIDOMATERNO = upper(APELLIDOMATERNO)
+replace APELLIDOMATERNO = ustrrtrim(APELLIDOMATERNO)
+replace APELLIDOMATERNO = ustrltrim(APELLIDOMATERNO)
+replace APELLIDOMATERNO = stritrim(APELLIDOMATERNO)
+
+replace NOMBRE2="X" if NOMBRE2==""
+
+
+gen NEWINITIALS=""
+replace NEWINITIALS=substr(NOMBRE1,1,1)+substr(NOMBRE2,1,1)+substr(APELLIDOPATERNO,1,1)+substr(APELLIDOMATERNO,1,1)
+
+
+export excel using "INICIALES PERSONAL SES.xlsx", sheet("initials") firstrow(variables)
+
+
